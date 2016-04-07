@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label>
+  <button id="button">确认填写</button>
+
+  <div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
+
+<script type="text/javascript">
+
+(function() {
+  /*	
+  在注释下方写下代码
+  给按钮button绑定一个点击事件
+  在事件处理函数中
+  获取aqi-input输入的值，并显示在aqi-display中
+  */
+
+  /* 摘抄自 CSDN - 路大大：
+   * 刚开始W3C搞了addEventListener，那时候只有2个参数，而且是从外向内触发事件。而微软的IE的attachEvent是从里向外触发。
+   * 后来W3C觉得微软的由里向外大多数情况下更加符合常理
+   *（大家好好想想，除了事件代理是不是由内向外更好解释，通俗来讲，你被人打了，是不是你比你爸爸先知道）
+   * 所以索性在addEventListener里面加了第三个参数，而且默认是false，从而和微软的attachEvent有相同的触发行为。
+   */
+
+  var btn = document.getElementById('button'),
+      inputText = document.getElementById('aqi-input'),
+      disText = document.getElementById('aqi-display');
+
+  if(btn.addEventListener){
+      btn.addEventListener("click",display,false);   
+  }else{
+    btn.attachEvent("onclick",click);//IE
+  }
+  function display(){
+    var content = inputText.value;
+    if (content!='') {
+      disText.textContent = content;
+    }else{
+      alert("输入为空，请重新输入");
+    }
+  }
+})();
+
+</script>
+</body>
+</html>
